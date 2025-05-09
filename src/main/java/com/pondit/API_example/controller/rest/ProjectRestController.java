@@ -2,17 +2,20 @@ package com.pondit.API_example.controller.rest;
 
 import com.pondit.API_example.model.domain.Project;
 import com.pondit.API_example.model.dto.CreateProjectRequest;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Tag(name = "Project Resource", description = "API for managing projects")
 @RestController
 @RequestMapping("/api/projects")
 public class ProjectRestController {
 
     List <Project> projects = new ArrayList<>();
 
+    @Tag(name = "Get all projects", description = "Get all projects")
     @GetMapping
     public List<Project> getAllProjects(){
         return projects;
@@ -22,7 +25,7 @@ public class ProjectRestController {
 //    public Project getProjectById(@PathVariable int id) {
 //        return null;
 //    }
-
+    @Tag(name = "Create project", description = "Create a new project")
     @PostMapping
     public Project createProject(@RequestBody CreateProjectRequest request){
 
