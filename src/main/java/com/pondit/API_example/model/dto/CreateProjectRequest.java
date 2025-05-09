@@ -1,6 +1,6 @@
 package com.pondit.API_example.model.dto;
 
-public class ProjectDTO {
+public class CreateProjectRequest {
 
     private String name;
     private String description;
