@@ -1,4 +1,4 @@
-package com.pondit.API_example.controller.web;
+package com.pondit.portfolio.controller.web;
 
 
 import org.springframework.stereotype.Controller;

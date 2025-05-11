@@ -1,7 +1,7 @@
-package com.pondit.API_example.controller.rest;
+package com.pondit.portfolio.controller.rest;
 
-import com.pondit.API_example.model.domain.Project;
-import com.pondit.API_example.model.dto.CreateProjectRequest;
+import com.pondit.portfolio.model.domain.Project;
+import com.pondit.portfolio.model.dto.CreateProjectRequest;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 

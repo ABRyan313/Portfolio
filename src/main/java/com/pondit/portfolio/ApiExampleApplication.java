@@ -1,4 +1,4 @@
-package com.pondit.API_example;
+package com.pondit.portfolio;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

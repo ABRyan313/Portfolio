@@ -1,4 +1,4 @@
-package com.pondit.API_example;
+package com.pondit.portfolio;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

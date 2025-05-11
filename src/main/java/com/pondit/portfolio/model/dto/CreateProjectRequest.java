@@ -1,4 +1,4 @@
-package com.pondit.API_example.model.dto;
+package com.pondit.portfolio.model.dto;
 
 public class CreateProjectRequest {
 

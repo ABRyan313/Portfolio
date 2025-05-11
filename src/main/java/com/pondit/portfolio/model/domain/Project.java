@@ -1,4 +1,4 @@
-package com.pondit.API_example.model.domain;
+package com.pondit.portfolio.model.domain;
 
 public class Project {
 
