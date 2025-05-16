@@ -2,7 +2,9 @@ package com.pondit.portfolio.controller.rest;
 
 import com.pondit.portfolio.model.domain.Project;
 import com.pondit.portfolio.model.dto.CreateProjectRequest;
+import com.pondit.portfolio.service.ProjectService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -13,27 +15,24 @@ import java.util.List;
 @RequestMapping("/api/projects")
 public class ProjectRestController {
 
-    List <Project> projects = new ArrayList<>();
+    @Autowired
+    ProjectService projectService;
 
-    @Tag(name = "Get all projects", description = "Get all projects")
+
     @GetMapping
     public List<Project> getAllProjects(){
-        return projects;
+        return projectService.getAllProjects();
     }
 
 //    @GetMapping("/{id}")
 //    public Project getProjectById(@PathVariable int id) {
 //        return null;
 //    }
-    @Tag(name = "Create project", description = "Create a new project")
+
+
     @PostMapping
     public Project createProject(@RequestBody CreateProjectRequest request){
 
-        String name = request.getName();
-        String description = request.getDescription();
-
-        Project project = new Project(name, description);
-        projects.add(project);
-        return new Project(name, description);
+        return projectService.createProject(request);
     }
 }
