@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProjectService {
@@ -23,6 +24,21 @@ public class ProjectService {
             String entityDescription = projectEntity.getDescription();
             return new Project(entityId, entityName, entityDescription);
         }).toList();
+    }
+
+    public Project getProjectById(Long id){
+        Optional<ProjectEntity> projectEntityOptional = projectRepository.findById(id);
+        if(projectEntityOptional.isEmpty()){
+            throw new RuntimeException("ProjectNotFound");
+        }
+
+        ProjectEntity projectEntity = projectEntityOptional.get();
+        Long entityId = projectEntity.getId();
+        String entityName = projectEntity.getName();
+        String entityDescription = projectEntity.getDescription();
+
+        Project project = new Project(entityId, entityName, entityDescription);
+        return project;
     }
 
     public Project createProject(CreateProjectRequest request){
@@ -41,4 +57,6 @@ public class ProjectService {
         String savedEntityDescription = savedEntity.getDescription();
         return new Project(savedEntityId, savedEntityName, savedEntityDescription);
     }
+
+
 }

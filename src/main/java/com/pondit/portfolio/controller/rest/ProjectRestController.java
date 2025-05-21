@@ -24,10 +24,10 @@ public class ProjectRestController {
         return projectService.getAllProjects();
     }
 
-//    @GetMapping("/{id}")
-//    public Project getProjectById(@PathVariable int id) {
-//        return null;
-//    }
+    @GetMapping("/{id}")
+    public Project getProject(@PathVariable Long id) {
+        return projectService.getProjectById(id);
+    }
 
 
     @PostMapping
