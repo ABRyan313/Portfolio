@@ -1,7 +1,9 @@
 package com.pondit.portfolio.controller.rest;
 
+import com.pondit.portfolio.NotFoundException;
 import com.pondit.portfolio.model.domain.Project;
 import com.pondit.portfolio.model.dto.CreateProjectRequest;
+import com.pondit.portfolio.model.dto.UpdateProjectRequest;
 import com.pondit.portfolio.service.ProjectService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +44,29 @@ public class ProjectRestController {
     public Project createProject(@RequestBody CreateProjectRequest request){
 
         return projectService.createProject(request);
+    }
+
+    @PutMapping("{id}")
+    public void updateProject(@PathVariable Long id, @RequestBody UpdateProjectRequest request){
+        try{
+            projectService.updateProject(id, request);
+        } catch (NotFoundException e) {
+            ResponseEntity.notFound().build();
+        }
+        catch(Exception e){
+            ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @DeleteMapping("{id}")
+    public void deleteProject(@PathVariable Long id){
+        try{
+            projectService.deleteProject(id);
+        }
+        catch (NotFoundException e) {
+            ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            ResponseEntity.internalServerError().build();
+        }
     }
 }

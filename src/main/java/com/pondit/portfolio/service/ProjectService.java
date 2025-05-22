@@ -1,7 +1,9 @@
 package com.pondit.portfolio.service;
 
+import com.pondit.portfolio.NotFoundException;
 import com.pondit.portfolio.model.domain.Project;
 import com.pondit.portfolio.model.dto.CreateProjectRequest;
+import com.pondit.portfolio.model.dto.UpdateProjectRequest;
 import com.pondit.portfolio.persistance.entity.ProjectEntity;
 import com.pondit.portfolio.persistance.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +60,34 @@ public class ProjectService {
         return new Project(savedEntityId, savedEntityName, savedEntityDescription);
     }
 
+    public void updateProject(Long id, UpdateProjectRequest request) throws NotFoundException{
+        // request
+        String name = request.getName();
+        String description = request.getDescription();
 
+        // query existing project
+        Optional<ProjectEntity> projectEntityOptional = projectRepository.findById(id);
+
+        if (projectEntityOptional.isEmpty()) {
+            throw new NotFoundException("Project not found");
+        }
+
+        // save to database
+        ProjectEntity projectEntity = projectEntityOptional.get();
+        projectEntity.setName(name);
+        projectEntity.setDescription(description);
+        projectRepository.save(projectEntity);
+    }
+
+    public void deleteProject(Long id) throws NotFoundException{
+        // query existing project
+        Optional<ProjectEntity> projectEntityOptional = projectRepository.findById(id);
+        if (projectEntityOptional.isEmpty()) {
+            throw new NotFoundException("Project not found");
+        }
+
+        // delete from database
+        projectRepository.deleteById(id);
+
+    }
 }
