@@ -5,6 +5,7 @@ import com.pondit.portfolio.model.dto.CreateProjectRequest;
 import com.pondit.portfolio.service.ProjectService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -24,9 +25,16 @@ public class ProjectRestController {
         return projectService.getAllProjects();
     }
 
-    @GetMapping("/{id}")
-    public Project getProject(@PathVariable Long id) {
-        return projectService.getProjectById(id);
+    @GetMapping("{id}")
+    public ResponseEntity<Project> getProject(@PathVariable Long id) {
+        Project project;
+        try{
+            project = projectService.getProjectById(id);
+        }
+        catch(RuntimeException e){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(project);
     }
 
 
