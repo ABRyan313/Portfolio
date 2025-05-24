@@ -1,7 +1,7 @@
 # Portfolio
 Personal Portfolio Project using Java & Spring Boot
 
-## Learning Checklist
+## Implementing
 - [x] Java 17
 - [ ] Core Concepts
 
