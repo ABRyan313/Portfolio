@@ -1,7 +1,8 @@
 package com.pondit.portfolio.controller.rest;
 
 
-import com.pondit.portfolio.NotFoundException;
+
+import com.pondit.portfolio.exception.NotFoundException;
 import com.pondit.portfolio.model.domain.Project;
 import com.pondit.portfolio.model.dto.CreateProjectRequest;
 import com.pondit.portfolio.model.dto.UpdateProjectRequest;
@@ -36,8 +37,11 @@ public class ProjectRestController {
         try{
             project = projectService.getProjectById(id);
         }
-        catch(RuntimeException e){
+        catch (NotFoundException e) {
             return ResponseEntity.notFound().build();
+        }
+        catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
         }
         return ResponseEntity.ok(project);
     }
@@ -55,7 +59,7 @@ public class ProjectRestController {
     public void updateProject(@PathVariable Long id, @RequestBody UpdateProjectRequest request){
         try{
             projectService.updateProject(id, request);
-        } catch (NotFoundException e) {
+        } catch(NotFoundException e) {
             ResponseEntity.notFound().build();
         }
         catch(Exception e){

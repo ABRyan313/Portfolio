@@ -1,6 +1,6 @@
 package com.pondit.portfolio.service;
 
-import com.pondit.portfolio.NotFoundException;
+import com.pondit.portfolio.exception.NotFoundException;
 import com.pondit.portfolio.model.domain.Project;
 import com.pondit.portfolio.model.dto.CreateProjectRequest;
 import com.pondit.portfolio.model.dto.UpdateProjectRequest;
@@ -28,10 +28,10 @@ public class ProjectService {
         }).toList();
     }
 
-    public Project getProjectById(Long id){
+    public Project getProjectById(Long id) throws NotFoundException{
         Optional<ProjectEntity> projectEntityOptional = projectRepository.findById(id);
         if(projectEntityOptional.isEmpty()){
-            throw new RuntimeException("ProjectNotFound");
+            throw new NotFoundException("ProjectNotFound");
         }
 
         ProjectEntity projectEntity = projectEntityOptional.get();
