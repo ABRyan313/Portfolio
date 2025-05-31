@@ -48,8 +48,8 @@ public class ResumeConfig {
     public static class PersonalInfo{
         private String name;
         private String email;
-        private String LinkedInUrl;
-        private String GitHubUrl;
+        private String linkedInUrl;
+        private String gitHubUrl;
 
         public String getName() {
             return name;
@@ -68,19 +68,19 @@ public class ResumeConfig {
         }
 
         public String getLinkedInUrl() {
-            return LinkedInUrl;
+            return linkedInUrl;
         }
 
         public void setLinkedInUrl(String linkedInUrl) {
-            LinkedInUrl = linkedInUrl;
+            this.linkedInUrl = linkedInUrl;
         }
 
         public String getGitHubUrl() {
-            return GitHubUrl;
+            return gitHubUrl;
         }
 
         public void setGitHubUrl(String gitHubUrl) {
-            GitHubUrl = gitHubUrl;
+            this.gitHubUrl = gitHubUrl;
         }
     }
 
