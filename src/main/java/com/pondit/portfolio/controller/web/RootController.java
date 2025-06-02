@@ -1,6 +1,7 @@
 package com.pondit.portfolio.controller.web;
 
 import com.pondit.portfolio.config.ResumeConfig;
+import com.pondit.portfolio.service.ProjectService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class RootController {
 
     @Autowired
     ResumeConfig resumeConfig;
+
+    @Autowired
+    ProjectService projectService;
 
     @Value("${site.title}")
     String siteTitle;
@@ -35,6 +39,7 @@ public class RootController {
         model.addAttribute("education", resumeConfig.getEducation());
         model.addAttribute("experience", resumeConfig.getExperience());
         model.addAttribute("skills", resumeConfig.getSkills());
+        model.addAttribute("projects", projectService.getAllProjects());
 
         logger.debug("Rendering index page");
         return "index";
