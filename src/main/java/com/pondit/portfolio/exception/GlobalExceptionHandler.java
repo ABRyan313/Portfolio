@@ -1,6 +1,8 @@
 package com.pondit.portfolio.exception;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ProblemDetail;
@@ -12,9 +14,12 @@ import java.net.URI;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+    
+    private static Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(NotFoundException.class)
     public ProblemDetail handleNotFoundException(NotFoundException e){
+        logger.error("Resource not found: {}", e.getMessage());
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
         problemDetail.setTitle("Resource Not Found");
         problemDetail.setType(URI.create("https://example.com/not-found"));
@@ -23,12 +28,14 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public ProblemDetail handleMethodArgumentNotValidException(MethodArgumentTypeMismatchException e) {
-        return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "Invalid Input: " + e.getMessage());
+    public ProblemDetail handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
+        logger.error("Invalid Input Type: {}", e.getMessage());
+        return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "Invalid Input Type");
     }
 
     @ExceptionHandler(Exception.class)
     public ProblemDetail handleGenericException(Exception e) {
-        return ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        logger.error("Generic Exception: ", e);
+        return ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, "Something went wrong");
     }
 }
