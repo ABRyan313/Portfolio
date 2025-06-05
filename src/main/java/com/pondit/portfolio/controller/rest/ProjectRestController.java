@@ -32,17 +32,8 @@ public class ProjectRestController {
 
     @Operation(summary = "Get a project by id")
     @GetMapping("{id}")
-    public ResponseEntity<Project> getProject(@PathVariable Long id) {
-        Project project;
-        try{
-            project = projectService.getProjectById(id);
-        }
-        catch (NotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
-        catch (Exception e) {
-            return ResponseEntity.internalServerError().build();
-        }
+    public ResponseEntity<Project> getProject(@PathVariable Long id) throws NotFoundException{
+        Project project = projectService.getProjectById(id);
         return ResponseEntity.ok(project);
     }
 
@@ -56,27 +47,13 @@ public class ProjectRestController {
 
     @Operation(summary = "Update a project by id")
     @PutMapping("{id}")
-    public void updateProject(@PathVariable Long id, @RequestBody UpdateProjectRequest request){
-        try{
-            projectService.updateProject(id, request);
-        } catch(NotFoundException e) {
-            ResponseEntity.notFound().build();
-        }
-        catch(Exception e){
-            ResponseEntity.internalServerError().build();
-        }
+    public void updateProject(@PathVariable Long id, @RequestBody UpdateProjectRequest request) throws NotFoundException{
+      projectService.updateProject(id, request);
     }
 
     @Operation(summary = "Delete a project by id")
     @DeleteMapping("{id}")
-    public void deleteProject(@PathVariable Long id){
-        try{
-            projectService.deleteProject(id);
-        }
-        catch (NotFoundException e) {
-            ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            ResponseEntity.internalServerError().build();
-        }
+    public void deleteProject(@PathVariable Long id) throws NotFoundException{
+      projectService.deleteProject(id);
     }
 }
