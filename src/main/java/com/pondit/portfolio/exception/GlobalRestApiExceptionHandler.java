@@ -1,10 +1,10 @@
 package com.pondit.portfolio.exception;
 
 
+import com.pondit.portfolio.exception.custom.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -13,9 +13,9 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import java.net.URI;
 
 @RestControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalRestApiExceptionHandler {
     
-    private static Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+    private static Logger logger = LoggerFactory.getLogger(GlobalRestApiExceptionHandler.class);
 
     @ExceptionHandler(NotFoundException.class)
     public ProblemDetail handleNotFoundException(NotFoundException e){
