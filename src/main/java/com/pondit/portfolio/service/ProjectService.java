@@ -44,8 +44,8 @@ public class ProjectService {
     }
 
     public Project createProject(CreateProjectRequest request){
-        String name = request.getName();
-        String description = request.getDescription();
+        String name = request.name();
+        String description = request.description();
 
         //save project to database
         ProjectEntity entity = new ProjectEntity();
@@ -62,8 +62,8 @@ public class ProjectService {
 
     public void updateProject(Long id, UpdateProjectRequest request) throws NotFoundException{
         // request
-        String name = request.getName();
-        String description = request.getDescription();
+        String name = request.name();
+        String description = request.description();
 
         // query existing project
         Optional<ProjectEntity> projectEntityOptional = projectRepository.findById(id);
