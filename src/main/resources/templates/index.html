@@ -12,7 +12,7 @@
             color: #000;
         }
         .neubrutalist-header {
-            background-color: #ff0077;
+            background-color: #00008B;
             border: 4px solid #000;
             box-shadow: 8px 8px 0 #000;
             padding: 1rem;
@@ -38,7 +38,7 @@
             top: 20px;
         }
         .btn-neubrutalist {
-            background-color: #00ffcc;
+            background-color: #00008B;
             border: 2px solid #000;
             color: #000;
             font-weight: bold;
@@ -47,7 +47,7 @@
             box-shadow: 4px 4px 0 #000;
         }
         .btn-neubrutalist:hover {
-            background-color: #00cc99;
+            background-color: #00008B;
             transform: translate(-2px, -2px);
             box-shadow: 6px 6px 0 #000;
         }
@@ -77,7 +77,7 @@
             gap: 0.5rem;
         }
         .skills-list li {
-            background-color: #00ffcc;
+            background-color: #00008B;
             border: 2px solid #000;
             padding: 0.5rem 1rem;
             box-shadow: 3px 3px 0 #000;
@@ -93,7 +93,7 @@
 <body>
 <header class="neubrutalist-header">
     <div class="container">
-        <h1 class="display-4"><span th:text="${siteTitle}"></span></h1>Add commentMore actions
+        <h1 class="display-4"><span th:text="${siteTitle}"></span></h1>
         <p class="lead"><span th:text="${siteDescription}"></span></p>
     </div>
 </header>
@@ -113,8 +113,8 @@
             <div class="neubrutalist-card p-4 resume-section">
                 <h2>Education</h2>
                 <div class="resume-item" th:each="edu : ${education}">
-                    <h4 th:text="${edu.degree}">B.S. in Computer Science</h4>
-                    <p><strong th:text="${edu.institution}">University of Example</strong> | <span th:text="${edu.years}">2018 - 2022</span></p>
+                    <h4 th:text="${edu.degree}">B.S.C in Computer Science & Engineering</h4>
+                    <p><strong th:text="${edu.institution}">Daffodil International University</strong> | <span th:text="${edu.years}">2018 - 2022</span></p>
                     <p th:text="${edu.description}">Graduated with honors, focusing on software engineering and distributed systems.</p>
                 </div>
             </div>
@@ -123,7 +123,7 @@
                 <h2>Experience</h2>
                 <div class="resume-item" th:each="exp : ${experience}">
                     <h4 th:text="${exp.title}">Software Engineer</h4>
-                    <p><strong th:text="${exp.company}">Tech Corp</strong> | <span th:text="${exp.years}">2022 - Present</span></p>
+                    <p><strong th:text="${exp.company}">Helix IT Solutions</strong> | <span th:text="${exp.years}">2017 - 2020</span></p>
                     <p th:text="${exp.description}">Developed scalable backend systems using Spring Boot and microservices architecture.</p>
                 </div>
             </div>
@@ -136,7 +136,7 @@
             </div>
 
             <!-- Projects -->
-            <div class="neubrutalist-card p-4 resume-section">Add commentMore actions
+            <div class="neubrutalist-card p-4 resume-section">
                 <h2>Projects</h2>
                 <div class="resume-item" th:each="project : ${projects}">
                     <h4 th:text="${project.name}">Personal Portfolio</h4>
@@ -150,7 +150,7 @@
                 <ul class="list-unstyled">
                     <li><a href="/index" class="text-dark">Home</a></li>
                     <li><a href="/resume" class="text-dark">Resume</a></li>
-                    <li><a href="/index#contact" class="text-dark">Contact</a></li>
+                    <li><a href="/#contact" class="text-dark">Contact</a></li>
                 </ul>
                 <h3>Subscribe</h3>
                 <form>
