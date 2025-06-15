@@ -5,6 +5,7 @@ import com.pondit.portfolio.service.ProjectService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +37,7 @@ public class RootController {
         model.addAttribute("education", resumeConfig.getEducation());
         model.addAttribute("experience", resumeConfig.getExperience());
         model.addAttribute("skills", resumeConfig.getSkills());
-        model.addAttribute("projects", projectService.getAllProjects());
+        model.addAttribute("projects", projectService.getAllProjects(Pageable.unpaged()));
 
         log.debug("Rendering index page");
         return "index";

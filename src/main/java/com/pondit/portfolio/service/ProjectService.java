@@ -7,6 +7,7 @@ import com.pondit.portfolio.model.dto.UpdateProjectRequest;
 import com.pondit.portfolio.persistance.entity.ProjectEntity;
 import com.pondit.portfolio.persistance.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +19,8 @@ public class ProjectService {
    @Autowired
    ProjectRepository projectRepository;
 
-    public List <Project> getAllProjects(){
-        List <ProjectEntity> entitiyList = projectRepository.findAll();
+    public List <Project> getAllProjects(Pageable pageable){
+        List <ProjectEntity> entitiyList = projectRepository.findAll(pageable).getContent();
         return entitiyList.stream().map(projectEntity -> {
             Long entityId = projectEntity.getId();
             String entityName = projectEntity.getName();
