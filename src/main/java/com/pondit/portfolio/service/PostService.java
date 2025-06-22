@@ -3,6 +3,7 @@ package com.pondit.portfolio.service;
 import com.pondit.portfolio.model.domain.Post;
 import com.pondit.portfolio.persistance.entity.PostEntity;
 import com.pondit.portfolio.persistance.repository.PostRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,23 +19,10 @@ public class PostService {
 
     public List<Post> getAllPosts(Pageable pageable){
         List<PostEntity> entityList = postRepository.findAll(pageable).getContent();
-        return entityList.stream().map(postEntity ->{
-            // map entity to domain object
-            Long entityId = postEntity.getId();
-            String entityTitle = postEntity.getTitle();
-            String entityContent = postEntity.getContent();
-            String entitySlug = postEntity.getSlug();
-            Boolean entityPublished = postEntity.getPublished();
-            LocalDateTime entityPublishedAt = postEntity.getPublishedAt();
-
-            Post post = new Post();
-            post.setId(entityId);
-            post.setTitle(entityTitle);
-            post.setContent(entityContent);
-            post.setSlug(entitySlug);
-            post.setPublished(entityPublished);
-            post.setPublishedAt(entityPublishedAt);
-            return post;
+        return entityList.stream().map(entity ->{
+            Post domain = new Post();
+            BeanUtils.copyProperties(entity, domain);
+            return domain;
         }).toList();
     }
 }
