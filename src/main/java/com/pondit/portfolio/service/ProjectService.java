@@ -36,11 +36,8 @@ public class ProjectService {
         }
 
         ProjectEntity projectEntity = projectEntityOptional.get();
-        Long entityId = projectEntity.getId();
-        String entityName = projectEntity.getName();
-        String entityDescription = projectEntity.getDescription();
-
-        Project project = new Project(entityId, entityName, entityDescription);
+       Project project = new Project();
+       BeanUtils.copyProperties(projectEntity, project);
         return project;
     }
 
