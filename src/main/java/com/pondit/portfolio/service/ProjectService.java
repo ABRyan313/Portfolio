@@ -1,6 +1,7 @@
 package com.pondit.portfolio.service;
 
 import com.pondit.portfolio.exception.custom.NotFoundException;
+import com.pondit.portfolio.mapper.ProjectMapper;
 import com.pondit.portfolio.model.domain.Project;
 import com.pondit.portfolio.model.dto.CreateProjectRequest;
 import com.pondit.portfolio.model.dto.UpdateProjectRequest;
@@ -16,6 +17,9 @@ import java.util.Optional;
 
 @Service
 public class ProjectService {
+
+    @Autowired
+    ProjectMapper projectMapper;
 
    @Autowired
    ProjectRepository projectRepository;
@@ -34,11 +38,7 @@ public class ProjectService {
         if(projectEntityOptional.isEmpty()){
             throw new NotFoundException("ProjectNotFound");
         }
-
-        ProjectEntity projectEntity = projectEntityOptional.get();
-       Project project = new Project();
-       BeanUtils.copyProperties(projectEntity, project);
-        return project;
+        return projectMapper.entityToDomain(projectEntityOptional.get());
     }
 
     public Project createProject(CreateProjectRequest request){
