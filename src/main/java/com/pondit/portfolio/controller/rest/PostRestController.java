@@ -26,4 +26,6 @@ public class PostRestController {
         return postService.getAllPosts(pageable);
     }
 
+
+
 }
